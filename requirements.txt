@@ -1,0 +1,6 @@
+pandas
+yfinance
+finvizfinance
+lxml
+html5lib
+openpyxl
