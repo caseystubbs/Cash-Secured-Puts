@@ -2,8 +2,8 @@ name: Freedom Scanner
 
 on:
   schedule:
-    # Runs at 22:00 UTC (5:00 PM EST) every weekday
-    - cron: '0 22 * * 1-5'
+ # Runs at 14:30 UTC (9:30 AM EST) Mon-Fri
+    - cron: '30 14 * * 1-5'
   workflow_dispatch: # Allows manual trigger
 
 permissions:
