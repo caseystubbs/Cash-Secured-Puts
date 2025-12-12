@@ -1,0 +1,34 @@
+name: Freedom Scanner
+
+on:
+  schedule:
+    # Runs at 22:00 UTC (5:00 PM EST) every weekday
+    - cron: '0 22 * * 1-5'
+  workflow_dispatch: # Allows manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Libraries
+        run: pip install -r requirements.txt
+
+      - name: Run Scanner
+        run: python scanner.py
+
+      - name: Deploy to Web
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          keep_files: true
