@@ -20,12 +20,13 @@ def get_finviz_candidates():
     """
     print("⏳ Contacting Finviz for growth candidates...")
     
+    # CORRECTED FILTER KEY BELOW (Removed the space in 'growthqtr')
     filters_dict = {
         'Option/Short': 'Optionable',
         'Average Volume': MIN_VOLUME_STR,
         'Price': 'Over $10',
         '200-Day Simple Moving Average': 'Price above SMA200',
-        'EPS growth qtr over qtr': 'Positive (>0%)' # NEW: Earnings Growth Filter
+        'EPS growthqtr over qtr': 'Positive (>0%)' 
     }
     
     try:
@@ -55,14 +56,16 @@ def analyze_options_for_weeks(symbol, weeks_data):
         today = datetime.date.today()
         
         # We only care about the next 8 weeks of expirations
-        # Calculate the date range for 8 weeks
         max_date = today + datetime.timedelta(weeks=MAX_WEEKS)
         
         valid_exps = []
         for exp_str in expirations:
-            exp_date = datetime.datetime.strptime(exp_str, "%Y-%m-%d").date()
-            if today < exp_date <= max_date:
-                valid_exps.append(exp_str)
+            try:
+                exp_date = datetime.datetime.strptime(exp_str, "%Y-%m-%d").date()
+                if today < exp_date <= max_date:
+                    valid_exps.append(exp_str)
+            except:
+                continue
                 
         for exp in valid_exps:
             try:
@@ -71,7 +74,7 @@ def analyze_options_for_weeks(symbol, weeks_data):
             except:
                 continue
 
-            # Filter for OTM Puts
+            # Filter for OTM Puts (Strike < Current Price)
             otm_puts = puts[puts['strike'] < current_price].copy()
             
             best_roi_for_exp = None
@@ -113,7 +116,6 @@ def analyze_options_for_weeks(symbol, weeks_data):
             
             # If we found a winner for this expiration, add it to the global weekly bucket
             if best_roi_for_exp:
-                # Use Expiration Date as the key
                 if exp not in weeks_data:
                     weeks_data[exp] = []
                 weeks_data[exp].append(best_roi_for_exp)
@@ -238,18 +240,16 @@ def main():
     tickers = get_finviz_candidates()
     if not tickers: return
 
-    # Limit scan for speed (Github Actions has a timeout, scanning 200+ stocks deeply takes time)
-    # We will scan the first 80 candidates.
+    # Limit scan for speed. Set to tickers[:80] or similar to avoid timeouts.
     scan_list = tickers[:80]
     print(f"🔬 Scanning {len(scan_list)} tickers for 8-week expirations...")
     
-    # Dictionary to hold data: { "2023-10-27": [ {...}, {...} ], "2023-11-03": ... }
     weeks_data = {}
     
     for i, ticker in enumerate(scan_list):
         analyze_options_for_weeks(ticker, weeks_data)
         if (i+1) % 10 == 0: print(f"   Processed {i+1} tickers...")
-        time.sleep(1) # Polite delay
+        time.sleep(1) # Polite delay to avoid API bans
 
     if weeks_data:
         html = generate_tabbed_html(weeks_data)
