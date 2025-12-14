@@ -14,7 +14,7 @@ MIN_VOLUME_STR = 'Over 1M'
 MIN_ANN_ROI = 15.0
 MIN_PREMIUM = 0.15
 MIN_PROB_WIN = 0.60  
-OUTPUT_FILENAME = "cash_secured_puts_scan.html"
+OUTPUT_FILENAME = "index.html"
 
 # --- BRANDING ---
 LOGO_URL = "https://freedomincomeoptions.com/wp-content/uploads/2025/03/Freedom-income-options-440-x-100.png"
