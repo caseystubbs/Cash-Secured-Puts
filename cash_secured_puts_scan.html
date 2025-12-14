@@ -1,0 +1,210 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Freedom Income Options | Daily Cash Secured Put Scanner</title>
+        <link rel="icon" href="https://freedomincomeoptions.com/wp-content/uploads/2025/03/freedom-income-options-512-x-512.png" type="image/png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <style>
+            body { background-color: #f4f6f9; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+            .main-header { background-color: #fff; padding: 15px 0; border-bottom: 1px solid #e0e0e0; }
+            .header-logo { height: 60px; width: auto; margin-right: 15px; }
+            .header-title { font-size: 24px; font-weight: 700; color: #333; vertical-align: middle; }
+            .header-date { font-size: 14px; color: #666; text-align: right; font-weight: 600; }
+            .sub-header { background-color: #212529; color: #fff; padding: 8px 0; text-align: center; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; }
+            .nav-tabs { background-color: #212529; border-bottom: none; justify-content: center; padding-top: 5px; }
+            .nav-tabs .nav-link { color: #fff; border: none; border-radius: 0; padding: 10px 15px; font-weight: 600; font-size: 13px; margin: 0 2px; transition: all 0.2s; }
+            .nav-tabs .nav-link:hover { background-color: #343a40; color: #fff; }
+            .nav-tabs .nav-link.active { background-color: #fff; color: #000; border-top: 3px solid #28a745; font-weight: 700; }
+            .nav-link.best-trades { background-color: #198754 !important; color: #fff !important; }
+            .nav-link.best-trades.active { background-color: #146c43 !important; border-top-color: #fff !important; }
+            .nav-link.under-40 { background-color: #0d6efd !important; color: #fff !important; }
+            .nav-link.under-40.active { background-color: #0a58ca !important; border-top-color: #fff !important; }
+            .tab-content { background-color: #fff; padding: 20px; border: 1px solid #e0e0e0; border-top: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+            .top-trades-box { background-color: #ffc107; border: 3px solid #e0a800; border-radius: 10px; padding: 5px; margin-bottom: 20px; }
+            .blue-trades-box { background-color: #cff4fc; border: 3px solid #0dcaf0; border-radius: 10px; padding: 5px; margin-bottom: 20px; }
+            .top-trades-header { text-align: center; font-weight: 700; font-size: 18px; color: #212529; padding: 10px 0; text-transform: uppercase; }
+            .table-custom thead th { background-color: #28a745; color: white; font-weight: 600; border-bottom: none; }
+            .premium-txt { color: #28a745; font-weight: 700; }
+            .safety-txt { font-weight: 700; color: #198754; }
+            .prob-txt { font-weight: 700; }
+        </style>
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <img src="https://freedomincomeoptions.com/wp-content/uploads/2025/03/Freedom-income-options-440-x-100.png" alt="Freedom Income Options" class="header-logo">
+                        <span class="header-title">Daily Cash Secured Put Scanner</span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="header-date">Date: <strong>December 14, 2025 02:35 PM EST</strong></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="sub-header">
+            AVAILABLE EXPIRATIONS (DAYS OUT)
+        </div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link best-trades active" id="best-tab" data-bs-toggle="tab" data-bs-target="#best-tab-content" type="button" role="tab">
+                    <i class="fas fa-star me-1"></i> BEST TRADES
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link under-40" id="under40-tab" data-bs-toggle="tab" data-bs-target="#under40-tab-content" type="button" role="tab">
+                    <i class="fas fa-star me-1"></i> BEST UNDER $40
+                </button>
+            </li>
+    
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-0" data-bs-toggle="tab" data-bs-target="#content-0" type="button" role="tab">
+                    2025-12-19 (5 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-1" data-bs-toggle="tab" data-bs-target="#content-1" type="button" role="tab">
+                    2025-12-26 (12 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-2" data-bs-toggle="tab" data-bs-target="#content-2" type="button" role="tab">
+                    2026-01-02 (19 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-3" data-bs-toggle="tab" data-bs-target="#content-3" type="button" role="tab">
+                    2026-01-09 (26 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-4" data-bs-toggle="tab" data-bs-target="#content-4" type="button" role="tab">
+                    2026-01-16 (33 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-5" data-bs-toggle="tab" data-bs-target="#content-5" type="button" role="tab">
+                    2026-01-23 (40 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-6" data-bs-toggle="tab" data-bs-target="#content-6" type="button" role="tab">
+                    2026-01-30 (47 Days)
+                </button>
+            </li>
+        
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-7" data-bs-toggle="tab" data-bs-target="#content-7" type="button" role="tab">
+                    2026-02-20 (68 Days)
+                </button>
+            </li>
+        
+        </ul>
+
+        <div class="container-fluid px-0">
+            <div class="tab-content" id="myTabContent">
+                
+                <div class="tab-pane fade show active" id="best-tab-content" role="tabpanel">
+                    <div class="top-trades-box">
+                        <div class="top-trades-header">
+                            <i class="fas fa-medal me-2"></i> TOP 3 FREEDOM PUTS (8-WEEK MAX)
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-custom table-striped text-center mb-0 align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>RANK</th><th>TICKER</th><th>EXPIRATION</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white">
+    <tr><td><strong>#1</strong></td><td><strong>ASTS</strong></td><td>2025-12-19</td><td>$73.0</td><td class="safety-txt">4.8%</td><td class="prob-txt">63.6%</td><td class="premium-txt">$2.55</td><td>255.0%</td></tr><tr><td><strong>#2</strong></td><td><strong>UUUU</strong></td><td>2025-12-19</td><td>$14.0</td><td class="safety-txt">3.9%</td><td class="prob-txt">61.3%</td><td class="premium-txt">$0.45</td><td>234.64%</td></tr><tr><td><strong>#3</strong></td><td><strong>CLS</strong></td><td>2025-12-19</td><td>$295.0</td><td class="safety-txt">3.8%</td><td class="prob-txt">65.7%</td><td class="premium-txt">$7.10</td><td>175.69%</td></tr></tbody></table></div></div></div>
+                <div class="tab-pane fade" id="under40-tab-content" role="tabpanel">
+                    <div class="blue-trades-box">
+                        <div class="top-trades-header">
+                            <i class="fas fa-search-dollar me-2"></i> TOP 3 TRADES UNDER $40
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-custom table-striped text-center mb-0 align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>RANK</th><th>TICKER</th><th>PRICE</th><th>EXPIRATION</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white">
+    <tr><td><strong>#1</strong></td><td><strong>UUUU</strong></td><td>$14.57</td><td>2025-12-19</td><td>$14.0</td><td class="safety-txt">3.9%</td><td class="prob-txt">61.3%</td><td class="premium-txt">$0.45</td><td>234.64%</td></tr><tr><td><strong>#2</strong></td><td><strong>LQDA</strong></td><td>$33.38</td><td>2025-12-19</td><td>$30.5</td><td class="safety-txt">8.6%</td><td class="prob-txt">73.5%</td><td class="premium-txt">$0.65</td><td>155.57%</td></tr><tr><td><strong>#3</strong></td><td><strong>CDE</strong></td><td>$17.25</td><td>2025-12-19</td><td>$16.5</td><td class="safety-txt">4.3%</td><td class="prob-txt">67.0%</td><td class="premium-txt">$0.35</td><td>154.85%</td></tr></tbody></table></div></div></div>
+                <div class="tab-pane fade" id="content-0" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$73.0</td><td class="safety-txt">4.8%</td><td class="prob-txt">63.6%</td><td class="premium-txt">$2.55</td><td>255.0%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$14.0</td><td class="safety-txt">3.9%</td><td class="prob-txt">61.3%</td><td class="premium-txt">$0.45</td><td>234.64%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$295.0</td><td class="safety-txt">3.8%</td><td class="prob-txt">65.7%</td><td class="premium-txt">$7.10</td><td>175.69%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$220.0</td><td class="safety-txt">2.1%</td><td class="prob-txt">60.3%</td><td class="premium-txt">$5.10</td><td>169.23%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$116.0</td><td class="safety-txt">2.9%</td><td class="prob-txt">63.7%</td><td class="premium-txt">$2.65</td><td>166.77%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>KTOS</strong></td><td>$75.96</td><td>$74.0</td><td class="safety-txt">2.6%</td><td class="prob-txt">61.1%</td><td class="premium-txt">$1.60</td><td>157.84%</td><td><a href="https://finance.yahoo.com/quote/KTOS/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$45.0</td><td class="safety-txt">2.5%</td><td class="prob-txt">62.3%</td><td class="premium-txt">$0.96</td><td>155.73%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>LQDA</strong></td><td>$33.38</td><td>$30.5</td><td class="safety-txt">8.6%</td><td class="prob-txt">73.5%</td><td class="premium-txt">$0.65</td><td>155.57%</td><td><a href="https://finance.yahoo.com/quote/LQDA/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$16.5</td><td class="safety-txt">4.3%</td><td class="prob-txt">67.0%</td><td class="premium-txt">$0.35</td><td>154.85%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>LRCX</strong></td><td>$160.52</td><td>$157.5</td><td class="safety-txt">1.9%</td><td class="prob-txt">61.0%</td><td class="premium-txt">$3.00</td><td>139.05%</td><td><a href="https://finance.yahoo.com/quote/LRCX/options?date=1766102400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-1" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$71.0</td><td class="safety-txt">7.4%</td><td class="prob-txt">63.4%</td><td class="premium-txt">$3.00</td><td>128.52%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$16.5</td><td class="safety-txt">4.3%</td><td class="prob-txt">61.4%</td><td class="premium-txt">$0.55</td><td>101.39%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$295.0</td><td class="safety-txt">3.8%</td><td class="prob-txt">60.0%</td><td class="premium-txt">$9.60</td><td>98.98%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$13.5</td><td class="safety-txt">7.3%</td><td class="prob-txt">62.4%</td><td class="premium-txt">$0.40</td><td>90.12%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$217.5</td><td class="safety-txt">3.2%</td><td class="prob-txt">60.3%</td><td class="premium-txt">$6.15</td><td>86.01%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$115.0</td><td class="safety-txt">3.8%</td><td class="prob-txt">62.3%</td><td class="premium-txt">$3.20</td><td>84.64%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$44.5</td><td class="safety-txt">3.6%</td><td class="prob-txt">62.6%</td><td class="premium-txt">$1.15</td><td>78.6%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMD</strong></td><td>$210.78</td><td>$205.0</td><td class="safety-txt">2.7%</td><td class="prob-txt">61.4%</td><td class="premium-txt">$4.80</td><td>71.22%</td><td><a href="https://finance.yahoo.com/quote/AMD/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>PAAS</strong></td><td>$49.73</td><td>$48.0</td><td class="safety-txt">3.5%</td><td class="prob-txt">62.6%</td><td class="premium-txt">$1.10</td><td>69.7%</td><td><a href="https://finance.yahoo.com/quote/PAAS/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RKT</strong></td><td>$18.71</td><td>$18.0</td><td class="safety-txt">3.8%</td><td class="prob-txt">65.3%</td><td class="premium-txt">$0.37</td><td>62.52%</td><td><a href="https://finance.yahoo.com/quote/RKT/options?date=1766707200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-2" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$70.0</td><td class="safety-txt">8.7%</td><td class="prob-txt">62.8%</td><td class="premium-txt">$3.40</td><td>93.31%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$290.0</td><td class="safety-txt">5.4%</td><td class="prob-txt">61.3%</td><td class="premium-txt">$11.20</td><td>74.19%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$16.0</td><td class="safety-txt">7.2%</td><td class="prob-txt">65.2%</td><td class="premium-txt">$0.55</td><td>66.04%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$114.0</td><td class="safety-txt">4.6%</td><td class="prob-txt">60.7%</td><td class="premium-txt">$3.85</td><td>64.88%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$215.0</td><td class="safety-txt">4.4%</td><td class="prob-txt">60.9%</td><td class="premium-txt">$7.10</td><td>63.44%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$13.0</td><td class="safety-txt">10.8%</td><td class="prob-txt">70.2%</td><td class="premium-txt">$0.40</td><td>59.11%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$44.0</td><td class="safety-txt">4.7%</td><td class="prob-txt">62.5%</td><td class="premium-txt">$1.35</td><td>58.94%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RKT</strong></td><td>$18.71</td><td>$18.0</td><td class="safety-txt">3.8%</td><td class="prob-txt">61.7%</td><td class="premium-txt">$0.51</td><td>54.43%</td><td><a href="https://finance.yahoo.com/quote/RKT/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>LRCX</strong></td><td>$160.52</td><td>$155.0</td><td class="safety-txt">3.4%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$4.15</td><td>51.43%</td><td><a href="https://finance.yahoo.com/quote/LRCX/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>PAAS</strong></td><td>$49.73</td><td>$47.0</td><td class="safety-txt">5.5%</td><td class="prob-txt">65.8%</td><td class="premium-txt">$1.15</td><td>47.0%</td><td><a href="https://finance.yahoo.com/quote/PAAS/options?date=1767312000" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-3" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$69.0</td><td class="safety-txt">10.0%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$4.20</td><td>85.45%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$16.0</td><td class="safety-txt">7.2%</td><td class="prob-txt">61.1%</td><td class="premium-txt">$0.75</td><td>65.81%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$13.0</td><td class="safety-txt">10.8%</td><td class="prob-txt">64.3%</td><td class="premium-txt">$0.60</td><td>64.79%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$285.0</td><td class="safety-txt">7.0%</td><td class="prob-txt">62.0%</td><td class="premium-txt">$12.50</td><td>61.57%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$113.0</td><td class="safety-txt">5.4%</td><td class="prob-txt">60.4%</td><td class="premium-txt">$4.65</td><td>57.77%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>KTOS</strong></td><td>$75.96</td><td>$71.0</td><td class="safety-txt">6.5%</td><td class="prob-txt">60.2%</td><td class="premium-txt">$2.65</td><td>52.4%</td><td><a href="https://finance.yahoo.com/quote/KTOS/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$210.0</td><td class="safety-txt">6.6%</td><td class="prob-txt">63.4%</td><td class="premium-txt">$7.55</td><td>50.47%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$43.0</td><td class="safety-txt">6.8%</td><td class="prob-txt">64.3%</td><td class="premium-txt">$1.46</td><td>47.67%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>PAAS</strong></td><td>$49.73</td><td>$47.0</td><td class="safety-txt">5.5%</td><td class="prob-txt">61.9%</td><td class="premium-txt">$1.55</td><td>46.3%</td><td><a href="https://finance.yahoo.com/quote/PAAS/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMD</strong></td><td>$210.78</td><td>$200.0</td><td class="safety-txt">5.1%</td><td class="prob-txt">63.2%</td><td class="premium-txt">$6.20</td><td>43.52%</td><td><a href="https://finance.yahoo.com/quote/AMD/options?date=1767916800" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-4" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$13.0</td><td class="safety-txt">10.8%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$0.80</td><td>68.07%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$65.0</td><td class="safety-txt">15.3%</td><td class="prob-txt">65.7%</td><td class="premium-txt">$3.80</td><td>64.66%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$280.0</td><td class="safety-txt">8.6%</td><td class="prob-txt">62.8%</td><td class="premium-txt">$13.30</td><td>52.54%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$210.0</td><td class="safety-txt">6.6%</td><td class="prob-txt">60.6%</td><td class="premium-txt">$9.70</td><td>51.09%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$43.0</td><td class="safety-txt">6.8%</td><td class="prob-txt">62.1%</td><td class="premium-txt">$1.77</td><td>45.53%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$110.0</td><td class="safety-txt">7.9%</td><td class="prob-txt">64.0%</td><td class="premium-txt">$4.50</td><td>45.25%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>LQDA</strong></td><td>$33.38</td><td>$27.5</td><td class="safety-txt">17.6%</td><td class="prob-txt">68.7%</td><td class="premium-txt">$1.10</td><td>44.24%</td><td><a href="https://finance.yahoo.com/quote/LQDA/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$15.0</td><td class="safety-txt">13.0%</td><td class="prob-txt">68.7%</td><td class="premium-txt">$0.60</td><td>44.24%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>KTOS</strong></td><td>$75.96</td><td>$70.0</td><td class="safety-txt">7.8%</td><td class="prob-txt">63.1%</td><td class="premium-txt">$2.80</td><td>44.24%</td><td><a href="https://finance.yahoo.com/quote/KTOS/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>PAAS</strong></td><td>$49.73</td><td>$47.0</td><td class="safety-txt">5.5%</td><td class="prob-txt">60.2%</td><td class="premium-txt">$1.85</td><td>43.54%</td><td><a href="https://finance.yahoo.com/quote/PAAS/options?date=1768521600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-5" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$66.0</td><td class="safety-txt">14.0%</td><td class="prob-txt">61.6%</td><td class="premium-txt">$4.40</td><td>60.83%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$12.5</td><td class="safety-txt">14.2%</td><td class="prob-txt">63.4%</td><td class="premium-txt">$0.70</td><td>51.1%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$280.0</td><td class="safety-txt">8.6%</td><td class="prob-txt">61.0%</td><td class="premium-txt">$13.90</td><td>45.3%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$15.0</td><td class="safety-txt">13.0%</td><td class="prob-txt">66.9%</td><td class="premium-txt">$0.65</td><td>39.54%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$110.0</td><td class="safety-txt">7.9%</td><td class="prob-txt">62.9%</td><td class="premium-txt">$4.35</td><td>36.09%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>PAAS</strong></td><td>$49.73</td><td>$46.0</td><td class="safety-txt">7.5%</td><td class="prob-txt">62.6%</td><td class="premium-txt">$1.75</td><td>34.71%</td><td><a href="https://finance.yahoo.com/quote/PAAS/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$205.0</td><td class="safety-txt">8.8%</td><td class="prob-txt">64.4%</td><td class="premium-txt">$7.50</td><td>33.38%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>KTOS</strong></td><td>$75.96</td><td>$70.0</td><td class="safety-txt">7.8%</td><td class="prob-txt">61.0%</td><td class="premium-txt">$2.45</td><td>31.94%</td><td><a href="https://finance.yahoo.com/quote/KTOS/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMD</strong></td><td>$210.78</td><td>$195.0</td><td class="safety-txt">7.5%</td><td class="prob-txt">65.3%</td><td class="premium-txt">$6.70</td><td>31.35%</td><td><a href="https://finance.yahoo.com/quote/AMD/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$43.0</td><td class="safety-txt">6.8%</td><td class="prob-txt">60.6%</td><td class="premium-txt">$1.42</td><td>30.13%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1769126400" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-6" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$65.0</td><td class="safety-txt">15.3%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$4.70</td><td>56.15%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CLS</strong></td><td>$306.50</td><td>$270.0</td><td class="safety-txt">11.9%</td><td class="prob-txt">61.0%</td><td class="premium-txt">$16.90</td><td>48.61%</td><td><a href="https://finance.yahoo.com/quote/CLS/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>CDE</strong></td><td>$17.25</td><td>$15.0</td><td class="safety-txt">13.0%</td><td class="prob-txt">64.0%</td><td class="premium-txt">$0.75</td><td>38.83%</td><td><a href="https://finance.yahoo.com/quote/CDE/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$110.0</td><td class="safety-txt">7.9%</td><td class="prob-txt">60.9%</td><td class="premium-txt">$4.80</td><td>33.89%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$200.0</td><td class="safety-txt">11.0%</td><td class="prob-txt">66.0%</td><td class="premium-txt">$7.65</td><td>29.7%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMD</strong></td><td>$210.78</td><td>$195.0</td><td class="safety-txt">7.5%</td><td class="prob-txt">63.3%</td><td class="premium-txt">$7.25</td><td>28.87%</td><td><a href="https://finance.yahoo.com/quote/AMD/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>KTOS</strong></td><td>$75.96</td><td>$69.0</td><td class="safety-txt">9.2%</td><td class="prob-txt">61.9%</td><td class="premium-txt">$2.45</td><td>27.57%</td><td><a href="https://finance.yahoo.com/quote/KTOS/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>PAAS</strong></td><td>$49.73</td><td>$44.0</td><td class="safety-txt">11.5%</td><td class="prob-txt">67.9%</td><td class="premium-txt">$1.35</td><td>23.83%</td><td><a href="https://finance.yahoo.com/quote/PAAS/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMAT</strong></td><td>$259.21</td><td>$245.0</td><td class="safety-txt">5.5%</td><td class="prob-txt">62.1%</td><td class="premium-txt">$7.40</td><td>23.46%</td><td><a href="https://finance.yahoo.com/quote/AMAT/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>UUUU</strong></td><td>$14.57</td><td>$10.0</td><td class="safety-txt">31.4%</td><td class="prob-txt">79.5%</td><td class="premium-txt">$0.25</td><td>19.41%</td><td><a href="https://finance.yahoo.com/quote/UUUU/options?date=1769731200" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+                <div class="tab-pane fade" id="content-7" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover align-middle datatable" style="width:100%">
+                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
+                            <tbody>
+        <tr><td><strong>ASTS</strong></td><td>$76.70</td><td>$60.0</td><td class="safety-txt">21.8%</td><td class="prob-txt">63.5%</td><td class="premium-txt">$4.90</td><td>43.84%</td><td><a href="https://finance.yahoo.com/quote/ASTS/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>RDDT</strong></td><td>$224.78</td><td>$195.0</td><td class="safety-txt">13.2%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$13.65</td><td>37.57%</td><td><a href="https://finance.yahoo.com/quote/RDDT/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>KTOS</strong></td><td>$75.96</td><td>$67.5</td><td class="safety-txt">11.1%</td><td class="prob-txt">60.4%</td><td class="premium-txt">$4.40</td><td>34.99%</td><td><a href="https://finance.yahoo.com/quote/KTOS/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HOOD</strong></td><td>$119.50</td><td>$105.0</td><td class="safety-txt">12.1%</td><td class="prob-txt">61.8%</td><td class="premium-txt">$6.75</td><td>34.51%</td><td><a href="https://finance.yahoo.com/quote/HOOD/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>U</strong></td><td>$46.16</td><td>$41.0</td><td class="safety-txt">11.2%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$2.62</td><td>34.3%</td><td><a href="https://finance.yahoo.com/quote/U/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMD</strong></td><td>$210.78</td><td>$190.0</td><td class="safety-txt">9.9%</td><td class="prob-txt">62.7%</td><td class="premium-txt">$9.75</td><td>27.54%</td><td><a href="https://finance.yahoo.com/quote/AMD/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>LRCX</strong></td><td>$160.52</td><td>$145.0</td><td class="safety-txt">9.7%</td><td class="prob-txt">62.6%</td><td class="premium-txt">$7.20</td><td>26.65%</td><td><a href="https://finance.yahoo.com/quote/LRCX/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>APH</strong></td><td>$129.24</td><td>$120.0</td><td class="safety-txt">7.1%</td><td class="prob-txt">60.8%</td><td class="premium-txt">$5.70</td><td>25.5%</td><td><a href="https://finance.yahoo.com/quote/APH/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>AMAT</strong></td><td>$259.21</td><td>$240.0</td><td class="safety-txt">7.4%</td><td class="prob-txt">61.2%</td><td class="premium-txt">$11.10</td><td>24.83%</td><td><a href="https://finance.yahoo.com/quote/AMAT/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr><tr><td><strong>HMY</strong></td><td>$20.40</td><td>$18.0</td><td class="safety-txt">11.8%</td><td class="prob-txt">62.6%</td><td class="premium-txt">$0.80</td><td>23.86%</td><td><a href="https://finance.yahoo.com/quote/HMY/options?date=1771545600" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr></tbody></table></div></div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.datatable').DataTable({ "order": [[ 6, "desc" ]], "pageLength": 10, "lengthChange": false, "language": { "search": "Filter Tickers:" } });
+            });
+        </script>
+    </body>
+    </html>
+    
