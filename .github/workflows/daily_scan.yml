@@ -1,10 +1,13 @@
-name: Freedom Scanner
+name: Daily Scanner Update
 
 on:
   schedule:
-    # Runs at 14:30 UTC (9:30 AM EST) Mon-Fri
+    # 9:30 AM EST = 14:30 UTC
+    # Runs Monday (1) through Friday (5)
     - cron: '30 14 * * 1-5'
-  workflow_dispatch: # Allows manual trigger
+  
+  # Allows you to push the button manually to test it
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,25 +15,30 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
 
-      # --- THIS IS THE PART WE CHANGED ---
-      - name: Install Libraries
-        run: pip install pandas yfinance finvizfinance numpy
-      # -----------------------------------
+    - name: Install libraries
+      run: |
+        pip install pandas yfinance
+        # Add any other libraries your script uses here
 
-      - name: Run Scanner
-        run: python scanner.py
+    - name: Run Scanner Script
+      # REPLACE 'main.py' WITH YOUR ACTUAL SCRIPT NAME
+      run: python main.py
 
-      - name: Deploy to Web
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          keep_files: true
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name "Scanner Bot"
+        git config --global user.email "bot@noreply.github.com"
+        # We add index.html because that is your new home page
+        git add index.html
+        git commit -m "Daily market scan update" || echo "No changes to commit"
+        git push
