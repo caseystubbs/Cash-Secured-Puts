@@ -32,8 +32,7 @@ jobs:
 
     - name: Run Scanner Script
       # REPLACE 'main.py' WITH YOUR ACTUAL SCRIPT NAME
-      run: python main.py
-
+run: python scanner.py
     - name: Commit and Push changes
       run: |
         git config --global user.name "Scanner Bot"
