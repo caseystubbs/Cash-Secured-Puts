@@ -23,7 +23,7 @@ jobs:
 
     - name: Install libraries
       run: |
-        pip install pandas yfinance finvizfinance
+        pip install pandas yfinance finvizfinance scipy
 
     - name: Run Scanner Script
       run: python scanner.py
