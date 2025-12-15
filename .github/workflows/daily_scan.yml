@@ -2,11 +2,7 @@ name: Daily Scanner Update
 
 on:
   schedule:
-    # 9:30 AM EST = 14:30 UTC
-    # Runs Monday (1) through Friday (5)
     - cron: '30 14 * * 1-5'
-  
-  # Allows you to push the button manually to test it
   workflow_dispatch:
 
 permissions:
@@ -28,17 +24,14 @@ jobs:
     - name: Install libraries
       run: |
         pip install pandas yfinance
-        # Add any other libraries your script uses here
 
     - name: Run Scanner Script
-      # REPLACE 'main.py' WITH YOUR ACTUAL SCRIPT NAME
       run: python scanner.py
 
     - name: Commit and Push changes
       run: |
         git config --global user.name "Scanner Bot"
         git config --global user.email "bot@noreply.github.com"
-        # We add index.html because that is your new home page
         git add index.html
         git commit -m "Daily market scan update" || echo "No changes to commit"
         git push
