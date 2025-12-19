@@ -174,7 +174,9 @@ def analyze_stock(symbol, bucket_data):
             bid = opt.get('bid', 0)
             
             if strike >= current_price: continue
-            if bid < MIN_PREMIUM: continue
+            # FIX: Check if bid is valid before comparing
+        if bid is None or bid < MIN_PREMIUM:
+            continue
 
             vol = opt.get('volume', 0)
             oi = opt.get('open_interest', 0)
