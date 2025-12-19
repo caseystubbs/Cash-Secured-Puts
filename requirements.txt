@@ -4,3 +4,5 @@ finvizfinance
 lxml
 html5lib
 openpyxl
+scipy
+streamlit
