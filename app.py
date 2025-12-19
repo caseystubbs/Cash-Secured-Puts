@@ -16,7 +16,6 @@ MIN_VOLUME_STR = 'Over 1M'
 MIN_ANN_ROI = 15.0
 MIN_PREMIUM = 0.15
 MIN_PROB_WIN = 0.60  
-# OUTPUT_FILENAME = "index.html" (Not needed for live web app)
 
 # --- BRANDING ---
 LOGO_URL = "https://freedomincomeoptions.com/wp-content/uploads/2025/03/Freedom-income-options-440-x-100.png"
@@ -136,6 +135,9 @@ def get_tradier_price(symbol):
     return None
 
 def analyze_stock(symbol, bucket_data):
+    # Skip if key is missing (prevent partial config crash)
+    if "PASTE" in TRADIER_ACCESS_TOKEN: return
+
     if not check_trend_stability(symbol):
         return
 
@@ -171,6 +173,10 @@ def analyze_stock(symbol, bucket_data):
             strike = opt.get('strike', 0)
             bid = opt.get('bid', 0)
             
+            # --- CRASH FIX START ---
+            if bid is None: continue
+            # --- CRASH FIX END ---
+
             if strike >= current_price: continue
             if bid < MIN_PREMIUM: continue
 
@@ -248,204 +254,4 @@ def generate_dashboard_html(bucket_data):
             .header-title {{ font-size: 24px; font-weight: 700; color: #333; vertical-align: middle; }}
             .header-date {{ font-size: 14px; color: #666; text-align: right; font-weight: 600; }}
             .sub-header {{ background-color: #212529; color: #fff; padding: 8px 0; text-align: center; font-weight: 700; font-size: 14px; letter-spacing: 0.5px; }}
-            .nav-tabs {{ background-color: #212529; border-bottom: none; justify-content: center; padding-top: 5px; }}
-            .nav-tabs .nav-link {{ color: #fff; border: none; border-radius: 0; padding: 10px 15px; font-weight: 600; font-size: 13px; margin: 0 2px; transition: all 0.2s; }}
-            .nav-tabs .nav-link:hover {{ background-color: #343a40; color: #fff; }}
-            .nav-tabs .nav-link.active {{ background-color: #fff; color: #000; border-top: 3px solid #28a745; font-weight: 700; }}
-            .nav-link.best-trades {{ background-color: #198754 !important; color: #fff !important; }}
-            .nav-link.best-trades.active {{ background-color: #146c43 !important; border-top-color: #fff !important; }}
-            .nav-link.under-40 {{ background-color: #0d6efd !important; color: #fff !important; }}
-            .nav-link.under-40.active {{ background-color: #0a58ca !important; border-top-color: #fff !important; }}
-            .tab-content {{ background-color: #fff; padding: 20px; border: 1px solid #e0e0e0; border-top: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }}
-            .top-trades-box {{ background-color: #ffc107; border: 3px solid #e0a800; border-radius: 10px; padding: 5px; margin-bottom: 20px; }}
-            .blue-trades-box {{ background-color: #cff4fc; border: 3px solid #0dcaf0; border-radius: 10px; padding: 5px; margin-bottom: 20px; }}
-            .top-trades-header {{ text-align: center; font-weight: 700; font-size: 18px; color: #212529; padding: 10px 0; text-transform: uppercase; }}
-            .table-custom thead th {{ background-color: #28a745; color: white; font-weight: 600; border-bottom: none; }}
-            .premium-txt {{ color: #28a745; font-weight: 700; }}
-            .safety-txt {{ font-weight: 700; color: #198754; }}
-            .prob-txt {{ font-weight: 700; }}
-        </style>
-    </head>
-    <body>
-        <header class="main-header">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <img src="{LOGO_URL}" alt="Freedom Income Options" class="header-logo">
-                        <span class="header-title">Daily Cash Secured Put Scanner</span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="header-date">{formatted_date}</div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="sub-header">
-            AVAILABLE EXPIRATIONS (DAYS OUT)
-        </div>
-
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link best-trades active" id="best-tab" data-bs-toggle="tab" data-bs-target="#best-tab-content" type="button" role="tab">
-                    <i class="fas fa-star me-1"></i> BEST TRADES
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link under-40" id="under40-tab" data-bs-toggle="tab" data-bs-target="#under40-tab-content" type="button" role="tab">
-                    <i class="fas fa-star me-1"></i> BEST UNDER $40
-                </button>
-            </li>
-    """
-    
-    for i in bucket_indices:
-        if i in bucket_data and bucket_data[i]:
-            exps_in_bucket = [t['Expiration'] for t in bucket_data[i]]
-            most_common_exp = max(set(exps_in_bucket), key=exps_in_bucket.count)
-            avg_dte = int(np.mean([t['DTE'] for t in bucket_data[i]]))
-            tab_label = f"{most_common_exp} ({avg_dte} Days)"
-        else:
-            tab_label = f"Bucket {i+1} (No Data)"
-
-        html += f"""
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-{i}" data-bs-toggle="tab" data-bs-target="#content-{i}" type="button" role="tab">
-                    {tab_label}
-                </button>
-            </li>
-        """
-
-    html += """
-        </ul>
-
-        <div class="container-fluid px-0">
-            <div class="tab-content" id="myTabContent">
-                
-                <div class="tab-pane fade show active" id="best-tab-content" role="tabpanel">
-                    <div class="top-trades-box">
-                        <div class="top-trades-header">
-                            <i class="fas fa-medal me-2"></i> TOP 3 FREEDOM PUTS (8-WEEK MAX)
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-custom table-striped text-center mb-0 align-middle">
-                                <thead>
-                                    <tr>
-                                        <th>RANK</th><th>TICKER</th><th>EXPIRATION</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white">
-    """
-    for idx, trade in enumerate(top_trades):
-        html += f"""<tr><td><strong>#{idx+1}</strong></td><td><strong>{trade['Symbol']}</strong></td><td>{trade['Expiration']}</td><td>${trade['Strike']:.1f}</td><td class="safety-txt">{trade['Safety']}%</td><td class="prob-txt">{trade['Prob_Win']}%</td><td class="premium-txt">${trade['Premium']:.2f}</td><td>{trade['Ann_ROI']}%</td></tr>"""
-    if not top_trades: html += '<tr><td colspan="8" class="text-muted">No trades found.</td></tr>'
-    html += """</tbody></table></div></div></div>"""
-
-    html += """
-                <div class="tab-pane fade" id="under40-tab-content" role="tabpanel">
-                    <div class="blue-trades-box">
-                        <div class="top-trades-header">
-                            <i class="fas fa-search-dollar me-2"></i> TOP 3 TRADES UNDER $40
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-custom table-striped text-center mb-0 align-middle">
-                                <thead>
-                                    <tr>
-                                        <th>RANK</th><th>TICKER</th><th>PRICE</th><th>EXPIRATION</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white">
-    """
-    for idx, trade in enumerate(best_under_40):
-        html += f"""<tr><td><strong>#{idx+1}</strong></td><td><strong>{trade['Symbol']}</strong></td><td>${trade['Price']:.2f}</td><td>{trade['Expiration']}</td><td>${trade['Strike']:.1f}</td><td class="safety-txt">{trade['Safety']}%</td><td class="prob-txt">{trade['Prob_Win']}%</td><td class="premium-txt">${trade['Premium']:.2f}</td><td>{trade['Ann_ROI']}%</td></tr>"""
-    if not best_under_40: html += '<tr><td colspan="9" class="text-muted">No trades under $40 found.</td></tr>'
-    html += """</tbody></table></div></div></div>"""
-
-    for i in bucket_indices:
-        if i in bucket_data:
-            rows = sorted(bucket_data[i], key=lambda x: x['Score'], reverse=True)[:10]
-        else:
-            rows = []
-        dt_class = "datatable" if rows else ""
-        
-        html += f"""
-                <div class="tab-pane fade" id="content-{i}" role="tabpanel">
-                    <div class="table-responsive">
-                        <table class="table table-custom table-hover align-middle {dt_class}" style="width:100%">
-                            <thead><tr><th>TICKER</th><th>PRICE</th><th>STRIKE</th><th>SAFETY NET</th><th>PROB. WIN</th><th>PREMIUM</th><th>ANN. ROI</th><th>ACTION</th></tr></thead>
-                            <tbody>
-        """
-        if rows:
-            for row in rows:
-                html += f"""<tr><td><strong>{row['Symbol']}</strong></td><td>${row['Price']:.2f}</td><td>${row['Strike']:.1f}</td><td class="safety-txt">{row['Safety']}%</td><td class="prob-txt">{row['Prob_Win']}%</td><td class="premium-txt">${row['Premium']:.2f}</td><td>{row['Ann_ROI']}%</td><td><a href="https://finance.yahoo.com/quote/{row['Symbol']}/options?date={int(datetime.datetime.strptime(row['Expiration'], '%Y-%m-%d').timestamp())}" target="_blank" class="btn btn-sm btn-outline-success fw-bold">View Chain</a></td></tr>"""
-        else: html += '<tr><td colspan="8" class="text-center text-muted p-4">No data.</td></tr>'
-        html += """</tbody></table></div></div>"""
-
-    html += """
-            </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.datatable').DataTable({ "order": [[ 6, "desc" ]], "pageLength": 10, "lengthChange": false, "language": { "search": "Filter Tickers:" } });
-            });
-        </script>
-    </body>
-    </html>
-    """
-    return html
-
-# --- STREAMLIT APP RUNNER ---
-st.set_page_config(layout="wide", page_title="Freedom Scanner")
-
-# Initialize session state for the HTML content
-if 'html_output' not in st.session_state:
-    st.session_state.html_output = None
-
-# Create a clean interface to run the scan
-if st.session_state.html_output is None:
-    st.title("Freedom Income Options Scanner")
-    st.write("Click below to run the scan and generate the dashboard.")
-    
-    if st.button("RUN SCANNER (Exact Design)", type="primary"):
-        status_text = st.empty()
-        progress_bar = st.progress(0)
-        
-        status_text.text("📅 Initializing Tradier Scanner (Strict Trend: 30-Day SMA200 Hold)...")
-        candidates = get_finviz_candidates(status_text)
-        full_list = list(set(LIQUID_TICKERS + candidates))
-        scan_list = full_list[:100]  # LIMIT 100 as per your code
-        
-        status_text.text(f"🔬 Scanning {len(scan_list)} tickers...")
-        bucket_data = {}
-        
-        for i, ticker in enumerate(scan_list):
-            analyze_stock(ticker, bucket_data)
-            
-            # Update UI
-            if (i+1) % 5 == 0:
-                progress_bar.progress((i+1) / len(scan_list))
-                status_text.text(f"Processed {i+1}/{len(scan_list)} tickers...")
-            time.sleep(0.1)
-            
-        progress_bar.progress(100)
-        status_text.text("✅ Generating Dashboard Layout...")
-        
-        # GENERATE THE HTML STRING
-        final_html = generate_dashboard_html(bucket_data)
-        
-        # Save to state and rerun to display it
-        st.session_state.html_output = final_html
-        st.rerun()
-
-# IF WE HAVE DATA, RENDER THE HTML
-else:
-    # Button to reset and scan again
-    if st.button("🔄 Run New Scan"):
-        st.session_state.html_output = None
-        st.rerun()
-    
-    # This renders your CUSTOM HTML inside the page
-    components.html(st.session_state.html_output, height=2000, scrolling=True)
+            .nav-tabs {{ background-color: #212529; border
