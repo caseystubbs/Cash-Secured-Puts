@@ -11,6 +11,7 @@ from finvizfinance.screener.overview import Overview
 from scipy.stats import norm
 
 # --- CONFIGURATION ---
+CACHE_DURATION = 3600  # 3600 seconds = 1 Hour (Data refreshes hourly)
 MIN_PRICE = 10.0
 MIN_VOLUME_STR = 'Over 1M'
 MIN_ANN_ROI = 15.0
@@ -37,8 +38,7 @@ def get_headers():
         'Accept': 'application/json'
     }
 
-def get_finviz_candidates(status_container):
-    status_container.text("⏳ Contacting Finviz for candidates...")
+def get_finviz_candidates():
     filters_dict = {
         'Option/Short': 'Optionable',
         'Average Volume': MIN_VOLUME_STR,
@@ -59,8 +59,7 @@ def get_finviz_candidates(status_container):
         candidates = df_finviz['Ticker'].tolist()
         return candidates
 
-    except Exception as e:
-        status_container.text(f"❌ Finviz Error: {e}")
+    except Exception:
         return []
 
 def calculate_probability_of_win(stock_price, strike_price, days_to_expiry, implied_volatility):
@@ -83,15 +82,10 @@ def check_trend_stability(symbol):
     try:
         stock = yf.Ticker(symbol)
         hist = stock.history(period="2y") 
-        
         if len(hist) < 230: return False 
-        
         hist['SMA_200'] = hist['Close'].rolling(window=200).mean()
         last_30 = hist.iloc[-30:]
-        
-        # Strict trend check
-        is_stable = all(last_30['Close'] > last_30['SMA_200'])
-        return is_stable
+        return all(last_30['Close'] > last_30['SMA_200'])
     except:
         return False
 
@@ -137,8 +131,7 @@ def get_tradier_price(symbol):
 def analyze_stock(symbol, bucket_data):
     if "PASTE" in TRADIER_ACCESS_TOKEN: return
 
-    if not check_trend_stability(symbol):
-        return
+    if not check_trend_stability(symbol): return
 
     current_price = get_tradier_price(symbol)
     if not current_price: return
@@ -172,7 +165,6 @@ def analyze_stock(symbol, bucket_data):
             strike = opt.get('strike', 0)
             bid = opt.get('bid', 0)
             
-            # --- CRASH FIX ---
             if bid is None: continue
             
             if strike >= current_price: continue
@@ -234,7 +226,6 @@ def generate_dashboard_html(bucket_data):
 
     bucket_indices = range(8)
 
-    # START OF HTML STRING
     html = f"""
     <!DOCTYPE html>
     <html lang="en">
@@ -402,55 +393,29 @@ def generate_dashboard_html(bucket_data):
     """
     return html
 
-# --- STREAMLIT APP RUNNER ---
+# --- THE MAGIC CACHED FUNCTION ---
+@st.cache_data(ttl=CACHE_DURATION, show_spinner="Updating Market Data... (This happens once per hour)")
+def run_full_scan():
+    """Runs the scan and returns the HTML. Cached for 1 hour."""
+    candidates = get_finviz_candidates()
+    full_list = list(set(LIQUID_TICKERS + candidates))
+    scan_list = full_list[:100] # Limit 100 for safety
+    
+    bucket_data = {}
+    for i, ticker in enumerate(scan_list):
+        analyze_stock(ticker, bucket_data)
+        time.sleep(0.05)
+        
+    return generate_dashboard_html(bucket_data)
+
+# --- MAIN EXECUTION ---
 st.set_page_config(layout="wide", page_title="Freedom Scanner")
 
-# Initialize session state for the HTML content
-if 'html_output' not in st.session_state:
-    st.session_state.html_output = None
-
-# Create a clean interface to run the scan
-if st.session_state.html_output is None:
-    st.title("Freedom Income Options Scanner")
-    st.write("Click below to run the scan and generate the dashboard.")
-    
-    if st.button("RUN SCANNER (Exact Design)", type="primary"):
-        status_text = st.empty()
-        progress_bar = st.progress(0)
-        
-        status_text.text("📅 Initializing Tradier Scanner (Strict Trend: 30-Day SMA200 Hold)...")
-        candidates = get_finviz_candidates(status_text)
-        full_list = list(set(LIQUID_TICKERS + candidates))
-        scan_list = full_list[:100]  # LIMIT 100 as per your code
-        
-        status_text.text(f"🔬 Scanning {len(scan_list)} tickers...")
-        bucket_data = {}
-        
-        for i, ticker in enumerate(scan_list):
-            analyze_stock(ticker, bucket_data)
-            
-            # Update UI
-            if (i+1) % 5 == 0:
-                progress_bar.progress((i+1) / len(scan_list))
-                status_text.text(f"Processed {i+1}/{len(scan_list)} tickers...")
-            time.sleep(0.1)
-            
-        progress_bar.progress(100)
-        status_text.text("✅ Generating Dashboard Layout...")
-        
-        # GENERATE THE HTML STRING
-        final_html = generate_dashboard_html(bucket_data)
-        
-        # Save to state and rerun to display it
-        st.session_state.html_output = final_html
-        st.rerun()
-
-# IF WE HAVE DATA, RENDER THE HTML
-else:
-    # Button to reset and scan again
-    if st.button("🔄 Run New Scan"):
-        st.session_state.html_output = None
-        st.rerun()
-    
-    # This renders your CUSTOM HTML inside the page
-    components.html(st.session_state.html_output, height=2000, scrolling=True)
+# This one line handles everything:
+# If data is fresh, it loads instantly.
+# If data is old, it runs the scan, saves it, then loads it.
+try:
+    final_html = run_full_scan()
+    components.html(final_html, height=2000, scrolling=True)
+except Exception as e:
+    st.error(f"System Error: {e}")
