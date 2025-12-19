@@ -1,3 +1,4 @@
+from datetime import datetime
 import streamlit as st
 import pandas as pd
 import datetime
@@ -428,18 +429,19 @@ def main():
 if __name__ == "__main__":
     main()
 # --- WEB APP DISPLAY CODE ---
-# 1. Set up the page title and layout
 st.set_page_config(page_title="Freedom Options Scanner", layout="wide")
 
-# 2. Add your Title and Instructions
 st.title("💰 Freedom Income Options Scanner")
-st.write("Live data generated on demand.")
 
-# 3. The Refresh Button
-# (Clicking this button automatically re-runs the script to get fresh prices)
+# Get current server time and format it nicely
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+st.write(f"**Last Updated:** {current_time} (Server Time)")
+
+st.write("Click the button below to fetch fresh market data.")
+
+# The Refresh Button
 if st.button('Refresh Data'):
     st.rerun()
 
-# 4. Display the Data
-# 'df' is the variable name of your spreadsheet from earlier in the script
+# The Table
 st.dataframe(df, height=800, use_container_width=True)
